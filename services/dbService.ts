@@ -1,4 +1,4 @@
-
+import React from 'react';
 import { openDB, DBSchema, IDBPDatabase } from 'idb';
 import { Topic, ChatMessage } from '../types';
 import { TOPIC_CATEGORIES } from '../constants';
@@ -11,6 +11,7 @@ const CHAT_HISTORY_STORE = 'chatHistory';
 
 // Create a flat map for easy lookup during rehydration
 const allTopicsWithIcons = TOPIC_CATEGORIES.flatMap(cat => cat.topics);
+// FIX: Add 'React' import to resolve a complex type error. The error indicates two different definitions of React types are being used, which can happen when React is not explicitly imported in a .ts file. This should unify the type definitions and allow the Map constructor to be called correctly.
 const topicIconMap = new Map<string, React.FC<React.SVGProps<SVGSVGElement>> | undefined>(
     allTopicsWithIcons.map(t => [t.id, t.icon])
 );
