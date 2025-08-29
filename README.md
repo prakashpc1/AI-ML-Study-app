@@ -1,19 +1,19 @@
+
 # AI and ML Study Hub
 
-This is a modern, interactive web application designed to help students learn Artificial Intelligence (AI) and Machine Learning (ML) concepts. It features a sleek, dark-themed UI, AI-powered learning tools, and a comprehensive set of topics tailored for engineering students.
+This is a modern, interactive web application designed to help students learn Artificial Intelligence (AI) and Machine Learning (ML) concepts. It features a sleek, dark-themed UI, AI-powered learning tools, and a comprehensive set of topics tailored for engineering students. The app is designed to be **offline-first**, storing all student data locally on the device.
 
 ## Key Features
 
 - **Comprehensive Topics:** A wide range of subjects from AI basics and core algorithms to neural networks and model evaluation.
-- **Interactive UI:** A sophisticated, professional user interface inspired by modern design principles, with a fixed sidebar for easy navigation.
-- **AI-Powered Tools:**
+- **Interactive UI:** A sophisticated, professional user interface with a fixed sidebar for easy navigation.
+- **AI-Powered Tools (Online):**
     - **Smart Summarization:** Generate concise, AI-powered summaries of complex topics.
     - **Code Generation:** Get runnable Python code snippets for various algorithms.
     - **Dynamic Quizzes:** Test your knowledge with multiple-choice quizzes generated on the fly by an AI.
 - **AI Assistant:** A chat-based AI tutor to answer questions and provide real-world examples.
-- **Phone Authentication:** Secure user sign-in using phone number and OTP verification, powered by Firebase.
-- **Offline First:** Utilizes IndexedDB for offline access to topics and chat history (sync with Firebase when online).
-- **Bookmarking:** Save topics to review later, with data synced to the cloud via Firestore.
+- **Offline-First Student Profile:** A one-time student credential form stores profile data locally. No online account or login required.
+- **Local Data Storage:** Utilizes IndexedDB for offline access to topics, bookmarks, and chat history.
 - **Responsive Design:** Fully functional across desktop, tablet, and mobile devices.
 
 ## Tech Stack
@@ -21,8 +21,7 @@ This is a modern, interactive web application designed to help students learn Ar
 - **Frontend:** React, TypeScript, React Router
 - **Styling:** Tailwind CSS
 - **AI Integration:** Google Gemini API
-- **Backend & Database:** Firebase (Authentication, Firestore)
-- **Offline Storage:** IndexedDB (via `idb` library)
+- **Offline Storage:** IndexedDB (via `idb` library), LocalStorage
 - **Speech Recognition:** Web Speech API
 - **Charting:** Recharts
 
@@ -43,24 +42,16 @@ To run this project locally, follow these steps:
     npm install
     ```
 
-4.  **Configure Environment Variables:**
-    This project requires API keys from Firebase and Google AI Studio to function correctly. Create a `.env` file in the root of your project and add your credentials:
+4.  **Configure Environment Variables (Optional, for AI features):**
+    The core application works entirely offline. To enable the AI-powered features (Assistant, Summarizer, etc.), you need an API key from Google AI Studio. Create a `.env` file in the root of your project and add your key:
 
     ```.env
-    # Firebase Configuration
-    FIREBASE_API_KEY="AIzaSy..."
-    FIREBASE_AUTH_DOMAIN="your-project-id.firebaseapp.com"
-    FIREBASE_PROJECT_ID="your-project-id"
-    FIREBASE_STORAGE_BUCKET="your-project-id.appspot.com"
-    FIREBASE_MESSAGING_SENDER_ID="1234567890"
-    FIREBASE_APP_ID="1:1234567890:web:abcdef123456"
-
     # Google Gemini API Key
     API_KEY="YOUR_GEMINI_API_KEY_HERE"
     ```
 
-    - You can get your Firebase credentials from your project's settings in the [Firebase Console](https://console.firebase.google.com/).
     - You can get your Gemini API key from [Google AI Studio](https://aistudio.google.com/app/apikey).
+    - If you do not provide a key, the app will still run, but all AI-powered tools will be disabled.
 
 5.  **Run the development server:**
     ```bash

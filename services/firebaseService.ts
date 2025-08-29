@@ -1,3 +1,4 @@
+
 // This file is kept for configuration consistency but is no longer used for Authentication or user-specific data.
 // All user data is now handled locally via services/profile.ts (localStorage) and services/dbService.ts (IndexedDB).
 

@@ -1,5 +1,5 @@
 {
-  "name": "AI & ML Study Hub",
+  "name": "AI & ML Study web app",
   "description": "An interactive web application designed to help students learn Artificial Intelligence and Machine Learning concepts with AI-powered assistance, offline access, and modern UI.",
   "requestFramePermissions": [
     "microphone"

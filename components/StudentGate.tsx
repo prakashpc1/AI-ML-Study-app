@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { StudentProfile } from '../types';
 import { AcademyLogoIcon } from './icons/Icons';
@@ -79,7 +80,6 @@ const StudentGate: React.FC<StudentGateProps> = ({ onProfileReady, existingProfi
                 email: profile.email?.toLowerCase(),
             } as StudentProfile;
             
-            // Simulate a quick save operation
             setTimeout(() => {
                 onProfileReady(finalProfile);
                 setIsSubmitting(false);
@@ -88,54 +88,45 @@ const StudentGate: React.FC<StudentGateProps> = ({ onProfileReady, existingProfi
     };
 
     return (
-        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center p-4">
-            <div className="w-full max-w-2xl bg-gray-900 border border-gray-800 rounded-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
-                 <div className="text-center mb-6">
-                    <AcademyLogoIcon className="w-12 h-12 text-white mx-auto mb-3" />
-                    <h1 className="text-2xl sm:text-3xl font-bold text-white">Welcome to AI and ML study</h1>
-                    <p className="text-gray-400 mt-2">
-                        {existingProfile ? "Update your profile details." : "Please fill out your details to get started."}
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900 overflow-hidden">
+             <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/30 via-purple-500/30 to-pink-500/30 animate-gradient-xy"></div>
+            <div className="w-full max-w-md bg-black/40 backdrop-blur-xl border border-white/20 rounded-3xl p-6 sm:p-10 shadow-2xl max-h-[90vh] overflow-y-auto">
+                 <div className="text-center mb-8">
+                    <AcademyLogoIcon className="w-16 h-16 text-white mx-auto mb-4" />
+                    <h1 className="text-4xl sm:text-5xl font-extrabold text-white">
+                        {existingProfile ? "Your Profile" : "Get Started"}
+                    </h1>
+                    <p className="text-gray-300 mt-4 text-lg">
+                        {existingProfile ? "Update your details below." : "Create your local profile to begin."}
                     </p>
                 </div>
                 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <InputField label="Full Name" name="fullName" value={profile.fullName} onChange={handleChange} error={errors.fullName} required />
-                        <InputField label="Email (Optional)" name="email" type="email" value={profile.email} onChange={handleChange} error={errors.email} />
-                    </div>
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <InputField label="Institution" name="institution" value={profile.institution} onChange={handleChange} error={errors.institution} required />
+                <form onSubmit={handleSubmit} className="space-y-5">
+                    <InputField label="Full Name" name="fullName" value={profile.fullName} onChange={handleChange} error={errors.fullName} required />
+                    <InputField label="Institution" name="institution" value={profile.institution} onChange={handleChange} error={errors.institution} required />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <InputField label="Roll Number" name="rollNumber" value={profile.rollNumber} onChange={handleChange} error={errors.rollNumber} required />
+                        <InputField label="Phone" name="phone" type="tel" value={profile.phone} onChange={handleChange} error={errors.phone} required />
                     </div>
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <InputField label="Program (e.g., CSE)" name="program" value={profile.program} onChange={handleChange} error={errors.program} required />
                         <SelectField label="Semester" name="semester" value={profile.semester} options={semesterOptions} onChange={handleChange} error={errors.semester} required />
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <InputField label="Phone" name="phone" type="tel" value={profile.phone} onChange={handleChange} error={errors.phone} required />
-                         <SelectField label="Preferred Language" name="preferredLanguage" value={profile.preferredLanguage} options={languageOptions} onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1">Study Goals (Optional)</label>
-                        <textarea
-                            name="goals"
-                            value={profile.goals || ''}
-                            onChange={handleChange}
-                            rows={3}
-                            className="w-full bg-gray-800 border border-gray-700 rounded-lg py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
+                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <InputField label="Email (Optional)" name="email" type="email" value={profile.email} onChange={handleChange} error={errors.email} />
+                        <SelectField label="Preferred Language" name="preferredLanguage" value={profile.preferredLanguage} options={languageOptions} onChange={handleChange} />
                     </div>
 
                     <div className="pt-2">
                         <label className="flex items-center">
-                            <input type="checkbox" name="consent" checked={!!profile.consent} onChange={handleChange} className="h-4 w-4 rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-blue-500" />
-                            <span className="ml-3 text-sm text-gray-300">I agree to use my information to personalize my study experience.*</span>
+                            <input type="checkbox" name="consent" checked={!!profile.consent} onChange={handleChange} className="h-4 w-4 rounded bg-gray-700 border-gray-600 text-purple-500 focus:ring-purple-500" />
+                            <span className="ml-3 text-sm text-gray-300">I agree to use my info to personalize my study experience.*</span>
                         </label>
                         {errors.consent && <p className="text-xs text-red-400 mt-1">{errors.consent}</p>}
                     </div>
                     
-                    <div className="pt-4 flex flex-col sm:flex-row items-center gap-4">
-                         <button type="submit" disabled={isSubmitting} className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-colors disabled:bg-gray-500 flex items-center justify-center">
+                    <div className="pt-6 flex flex-col sm:flex-row items-center gap-4">
+                         <button type="submit" disabled={isSubmitting} className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg disabled:bg-gray-500 flex items-center justify-center">
                             {isSubmitting ? <LoadingSpinner /> : (existingProfile ? "Update Profile" : "Save & Continue")}
                         </button>
                          {onClearProfile && (
@@ -145,8 +136,8 @@ const StudentGate: React.FC<StudentGateProps> = ({ onProfileReady, existingProfi
                         )}
                     </div>
                 </form>
-                 <p className="text-xs text-gray-500 text-center mt-6">
-                    Data is stored only on your device (localStorage). You can clear it anytime.
+                 <p className="text-xs text-gray-500 text-center mt-8">
+                    Data is stored only on your device (localStorage).
                 </p>
             </div>
         </div>
@@ -156,8 +147,8 @@ const StudentGate: React.FC<StudentGateProps> = ({ onProfileReady, existingProfi
 // Helper components for form fields
 const InputField = ({ label, name, type = 'text', value, onChange, error, required = false }: any) => (
     <div>
-        <label htmlFor={name} className="block text-sm font-medium text-gray-300 mb-1">
-            {label}{required && '*'}
+        <label htmlFor={name} className="block text-sm font-semibold text-gray-300 mb-2">
+            {label}{required && <span className="text-red-400">*</span>}
         </label>
         <input
             id={name}
@@ -165,7 +156,7 @@ const InputField = ({ label, name, type = 'text', value, onChange, error, requir
             type={type}
             value={value || ''}
             onChange={onChange}
-            className={`w-full bg-gray-800 border ${error ? 'border-red-500' : 'border-gray-700'} rounded-lg py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            className={`w-full bg-white/5 border-2 ${error ? 'border-red-500/50' : 'border-white/20'} rounded-lg py-2.5 px-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur-sm transition-colors duration-300`}
         />
         {error && <p className="text-xs text-red-400 mt-1">{error}</p>}
     </div>
@@ -173,18 +164,18 @@ const InputField = ({ label, name, type = 'text', value, onChange, error, requir
 
 const SelectField = ({ label, name, value, options, onChange, error, required = false }: any) => (
      <div>
-        <label htmlFor={name} className="block text-sm font-medium text-gray-300 mb-1">
-            {label}{required && '*'}
+        <label htmlFor={name} className="block text-sm font-semibold text-gray-300 mb-2">
+            {label}{required && <span className="text-red-400">*</span>}
         </label>
         <select
             id={name}
             name={name}
             value={value || ''}
             onChange={onChange}
-            className={`w-full bg-gray-800 border ${error ? 'border-red-500' : 'border-gray-700'} rounded-lg py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            className={`w-full bg-white/5 border-2 ${error ? 'border-red-500/50' : 'border-white/20'} rounded-lg py-2.5 px-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur-sm transition-colors duration-300`}
         >
             <option value="" disabled>Select...</option>
-            {options.map((opt: string) => <option key={opt} value={opt}>{opt}</option>)}
+            {options.map((opt: string) => <option key={opt} value={opt} className="bg-gray-800">{opt}</option>)}
         </select>
         {error && <p className="text-xs text-red-400 mt-1">{error}</p>}
     </div>

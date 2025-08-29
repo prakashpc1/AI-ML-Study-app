@@ -1,3 +1,4 @@
+
 import { StudentProfile } from '../types';
 
 const PROFILE_STORAGE_KEY = 'student_profile_v1';

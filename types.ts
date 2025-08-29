@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 export interface StudentProfile {
@@ -9,7 +10,6 @@ export interface StudentProfile {
   semester: string;
   rollNumber: string;
   preferredLanguage?: string;
-  goals?: string;
   consent: boolean;
 }
 

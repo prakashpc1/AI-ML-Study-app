@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 // FIX: Remove imports from firebaseService as the service no longer exports them, and the Firebase integration is deprecated.
 // import { getFirebaseAuth, isFirebaseInitialized, onAuthStateChanged } from '../services/firebaseService';
